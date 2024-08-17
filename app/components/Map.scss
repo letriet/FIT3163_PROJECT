@@ -1,15 +1,16 @@
-$purple: #6a2876;
+$blue: #6fc7fa;
 $white: #ffffff;
 
 $gray500: #cbcbcb;
 $gray600: #535353;
+$black: #00000029;
 
 .map {
   position: relative;
-  border: 1px solid $gray500;
+  border: 1px solid $white;
   border-radius: 5px;
   overflow: hidden;
-  height: 500px;
+  height: 800px;
   padding: 0 0 60px 0;
   cursor: grab;
   .hint {
@@ -52,57 +53,14 @@ $gray600: #535353;
     .district {
       cursor: pointer;
       transition: 0.1s ease;
-      fill: #f3e37c;
-      stroke: #ffffff;
-      stroke-width: 0.15px;
+      fill: #ffffff;
+      stroke: #000000;
+      stroke-width: 0.5px;
       &:hover {
         stroke: #ffffff;
-        fill: $purple !important;
+        fill: $blue !important;
         stroke-width: 0.15px;
       }
-    }
-  }
-  .d3-legend {
-    position: absolute;
-    bottom: 0;
-    left: 10px;
-    bottom: 20px;
-    display: inline-flex;
-
-    ul.legend {
-      list-style: none;
-      margin: 0 0 7.5px 0;
-      padding: 0;
-      display: inline-flex;
-      li {
-        span {
-          display: block;
-          height: 20px;
-          margin-bottom: 5px;
-        }
-        div {
-          width: 70px;
-          height: 30px;
-          box-shadow: 0px 1px 3px #00000029;
-        }
-        margin: 0 15px 0 0;
-        text-align: center;
-        font-weight: bold;
-      }
-      li:last-child {
-        margin-right: 0;
-      }
-    }
-
-    ul.legend.na {
-      li {
-        margin-right: 15px;
-      }
-    }
-
-    .legend-gradient {
-      height: 45px;
-      box-shadow: 0px 1px 3px #00000029;
     }
   }
 }
@@ -170,28 +128,6 @@ $gray600: #535353;
   .map {
     .d3-map {
       height: 350px;
-    }
-    .d3-legend {
-      padding: 0;
-      margin: 0 0 20px 0;
-      width: 100%;
-      display: flex;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      justify-content: center;
-      ul.legend.na,
-      ul.legend {
-        li {
-          margin-right: 10px;
-          span {
-            font-size: 12px;
-          }
-          div {
-            width: 50px;
-          }
-        }
-      }
     }
   }
   .tooltip {

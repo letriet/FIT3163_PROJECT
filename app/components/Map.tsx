@@ -16,8 +16,6 @@ export default function CustomMap({ title, data }: MapProps) {  // Renamed from 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const dimensions = useResizeObserver(wrapperRef);
 
-  // const arrayColors = ["#C6E4E8", "#90CED6", "#57BCC7", "#00ABBA", "#009EAD"];
-
   useEffect(() => {
     if (!mapRef.current) return; // Ensure mapRef.current is not null before proceeding
 
@@ -78,7 +76,7 @@ export default function CustomMap({ title, data }: MapProps) {  // Renamed from 
 
   return (
     <section>
-      <h2>{title}</h2>
+      <h1 className="mx-auto px-8 flex flex-col justify-center h-full items-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{title}</h1>
       <div ref={wrapperRef} className="map">
         <div className="d3-map">
           <svg ref={mapRef} className="svg-map" />

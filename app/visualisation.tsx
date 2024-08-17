@@ -8,8 +8,8 @@ import geoJSON from "./assets/australia_data.json";
 
 export default function Map() {
     return (
-        <div className="Map">
-            <CustomMap title="Australia" data={geoJSON} />
+        <div className="CustomMap">
+            <CustomMap title="Map of Australia and Weather Stations" data={geoJSON} />
         </div>
     );
 }
