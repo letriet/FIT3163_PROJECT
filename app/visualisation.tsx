@@ -3,7 +3,7 @@ import React from "react";
 import * as d3 from "d3";
 import CustomMap from "../app/components/Map"
 
-import geoJSON from "./assets/australia_data.json";
+import geoJSON from "../app/components/data.json";
 
 
 export default function Map() {
