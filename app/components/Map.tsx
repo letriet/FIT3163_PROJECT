@@ -112,7 +112,7 @@ export default function CustomMap({ title, data, stations }: MapProps) {
         }
         return NaN; // Default or handle undefined case
       })
-      .attr('r', 1) // Adjust the radius as needed
+      .attr('r', 2) // Adjust the radius as needed
       .attr('fill', 'red')
       .on('mouseover', function (event, d) {
         tooltip

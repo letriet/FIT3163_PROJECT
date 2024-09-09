@@ -9,8 +9,8 @@ $black: #00000029;
   border: 1px solid $white;
   border-radius: 5px;
   overflow: hidden;
-  height: 800px;
-  padding: 0 0 60px 0;
+  height: 750px;
+  padding: 0 0 60px -60px;
   cursor: grab;
   .hint {
     width: 100%;
@@ -24,13 +24,13 @@ $black: #00000029;
     position: relative;
     span {
       display: block;
-      padding-right: 100px;
+      padding-right: 0px;
     }
   }
   .d3-map {
     position: absolute;
     left: 0px;
-    right: 0;
+    right: 0px;
     top: 10px;
     bottom: 0;
     height: 100%;
@@ -45,8 +45,8 @@ $black: #00000029;
   }
   .svg-map {
     display: block;
-    width: 90%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
     // margin-top: -50px;
     overflow: visible;
     .district {
