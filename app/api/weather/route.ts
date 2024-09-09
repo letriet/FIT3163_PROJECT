@@ -11,7 +11,7 @@ async function getClient() {
   if (!cachedClient) {
     const client = new MongoClient(uri);
     cachedClient = await client.connect();
-    console.log("MongoDB connected");  // Log connection success
+    console.log("MongoDB connected");
   }
   return cachedClient;
 }
@@ -21,46 +21,51 @@ export async function GET() {
     const client = await getClient();
     const db = client.db(dbName);
 
-    // Log when accessing collections
-    console.log(`Accessing collections in database: ${dbName}`);
+    console.log(`Fetching collections from database: ${dbName}`);
 
-    // Get all collections (weather stations)
+    // Fetch collections in parallel
     const collections = await db.listCollections().toArray();
-    console.log("Collections retrieved:", collections);  // Log collections
 
-    const weatherStations: any[] = [];
+    // Limit the number of collections processed to prevent overloading (e.g., only process 10 collections at a time)
+    const limitedCollections = collections.slice(0, 218);  // Adjust this limit as needed
 
-    for (const collectionInfo of collections) {
-      const collection = db.collection(collectionInfo.name);
-      const documents = await collection.find().toArray();
+    // Fetch documents from each collection in parallel
+    const weatherStations = await Promise.all(
+      limitedCollections.map(async (collectionInfo) => {
+        const collection = db.collection(collectionInfo.name);
 
-      // Log the number of documents found in the collection
-      console.log(`Collection: ${collectionInfo.name}, Documents found: ${documents.length}`);
+        // Fetch only a limited number of documents (e.g., 100)
+        const documents = await collection.find().limit(100).toArray();
 
-      // Transform MongoDB documents into your WeatherStation structure
-      if (documents.length > 0) {
-        const firstDoc = documents[0]; // Assume first doc has Lat/Long
-        const weatherData = documents.map((doc) => ({
-          index: doc.index,
-          date: doc.Date,
-          rain: doc.Rain,
-          max_temperature: doc.Max_temperature,
-          min_temperature: doc.Min_temperature,
-        }));
+        if (documents.length > 0) {
+          const firstDoc = documents[0];  // Assume first doc has Lat/Long
 
-        weatherStations.push({
-          name: collectionInfo.name,
-          latitude: firstDoc.Latitude,
-          longitude: firstDoc.Longitude,
-          data: weatherData,
-        });
-      }
-    }
+          const weatherData = documents.map((doc) => ({
+            index: doc.index,
+            date: doc.Date,
+            rain: doc.Rain,
+            max_temperature: doc.Max_temperature,
+            min_temperature: doc.Min_temperature,
+          }));
 
-    // Log the weather stations data being returned
-    console.log("Weather stations data prepared:", weatherStations);
+          return {
+            name: collectionInfo.name,
+            latitude: firstDoc.Latitude,
+            longitude: firstDoc.Longitude,
+            data: weatherData,
+          };
+        }
 
-    return NextResponse.json(weatherStations);  // Return the weather stations as JSON
+        return null;  // Return null if no data
+      })
+    );
+
+    // Filter out any null responses
+    const filteredWeatherStations = weatherStations.filter(station => station !== null);
+
+    console.log(`Fetched data from ${filteredWeatherStations.length} collections`);
+
+    return NextResponse.json(filteredWeatherStations);
   } catch (error) {
     console.error("Error fetching weather data:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
