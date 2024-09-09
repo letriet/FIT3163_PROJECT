@@ -35,7 +35,7 @@ export async function GET() {
         const collection = db.collection(collectionInfo.name);
 
         // Fetch only a limited number of documents (e.g., 100)
-        const documents = await collection.find().limit(1200).toArray();
+        const documents = await collection.find().limit(1150).toArray();
 
         if (documents.length > 0) {
           const firstDoc = documents[0];  // Assume first doc has Lat/Long
