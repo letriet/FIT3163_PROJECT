@@ -1,5 +1,4 @@
 $white: #ffffff;
-
 $gray500: #cbcbcb;
 $gray600: #535353;
 $black: #00000029;
@@ -9,9 +8,11 @@ $black: #00000029;
   border: 1px solid $white;
   border-radius: 5px;
   overflow: hidden;
-  height: 750px;
-  padding: 0 0 60px -60px;
+  height: 850px; // Adjusted height to fit map and details section
+  padding: 0 0 100px 0; // Adjusted bottom padding for map spacing
   cursor: grab;
+  background: #000009; // Dark background matching the div above for better visual continuity
+
   .hint {
     width: 100%;
     color: #535353;
@@ -27,6 +28,7 @@ $black: #00000029;
       padding-right: 0px;
     }
   }
+
   .d3-map {
     position: absolute;
     left: 0px;
@@ -35,6 +37,7 @@ $black: #00000029;
     bottom: 0;
     height: 100%;
   }
+
   .map-controls {
     position: absolute;
     left: 10px;
@@ -43,12 +46,13 @@ $black: #00000029;
       margin: 0 2.5px;
     }
   }
+
   .svg-map {
     display: block;
     width: 100%;
     height: 100%;
-    // margin-top: -50px;
     overflow: visible;
+
     .district {
       cursor: auto;
       transition: 0.1s ease;
@@ -59,15 +63,17 @@ $black: #00000029;
   }
 }
 
+// Style for tooltip
 .tooltip {
-  background: $white;
-  box-shadow: 0px 19px 38px #00000029;
+  background: #333333; // Changed to a dark background for better visibility with the new map background
+  box-shadow: 0px 19px 38px $black;
   border: 1px solid $gray500;
-  color: #282828;
+  color: $white; // Changed text color to white for contrast
   border-radius: 3px;
   padding: 15px 25px 15px 15px;
   position: absolute;
   transition: all 0.15s ease-in-out;
+
   &:before {
     content: '';
     display: block;
@@ -80,6 +86,7 @@ $black: #00000029;
     left: -9px;
     top: 10px;
   }
+
   &:after {
     content: '';
     display: block;
@@ -88,28 +95,33 @@ $black: #00000029;
     position: absolute;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
-    border-right: 10px solid $white;
+    border-right: 10px solid #333333; // Match background color
     left: -8px;
     top: 8px;
   }
+
   &.hidden {
     display: none;
   }
+
   ul {
     margin: 0;
     padding: 0;
     list-style: none;
     max-width: 360px;
+
     li {
       font-family: 'Lato', sans-serif;
       display: flex;
       margin-bottom: 0;
+
       span:first-child {
         text-align: right;
         width: 50px;
         display: block;
         min-width: 50px;
       }
+
       span:nth-child(2) {
         text-align: left;
         padding-left: 20px;
@@ -118,19 +130,98 @@ $black: #00000029;
   }
 }
 
+// Style for station details section
+.station-details {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid $gray500;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  color: #333;
+  max-width: 500px;
+  box-shadow: 0px 19px 38px $black;
+  transition: all 0.3s ease-in-out;
+
+  h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li {
+      margin-bottom: 8px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+  }
+}
+
+// Style for dropdowns
+.date-selection {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+
+  label {
+    color: $white; // Label color to stand out against dark background
+    font-weight: bold;
+  }
+
+  select {
+    background: #ffffff; // Light background for better visibility
+    color: #333333; // Darker text for contrast
+    border: 1px solid $gray600;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+
+    &:hover,
+    &:focus {
+      border-color: $gray500;
+    }
+  }
+}
+
+// Responsive styles
 @media only screen and (max-width: 768px) {
   .map {
     .d3-map {
       height: 350px;
     }
   }
+
   .tooltip {
     padding: 5px;
+
     ul {
       margin: 0;
       padding: 0;
+
       li {
         font-size: 10px;
+      }
+    }
+  }
+
+  .station-details {
+    max-width: 100%;
+    padding: 15px;
+    h2 {
+      font-size: 16px;
+    }
+
+    ul {
+      li {
+        font-size: 12px;
       }
     }
   }

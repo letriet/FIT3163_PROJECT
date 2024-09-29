@@ -52,6 +52,7 @@ export async function GET() {
             name: collectionInfo.name,
             latitude: firstDoc.Latitude,
             longitude: firstDoc.Longitude,
+            tourist_spot: firstDoc.Tourist_Spot_Name,
             data: weatherData,
           };
         }

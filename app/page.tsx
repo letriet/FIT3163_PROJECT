@@ -18,7 +18,7 @@ export default function Home() {
       </div>
 
       {/* The Map component which will dynamically fetch and display weather stations */}
-      <div>
+      <div className="w-full h-screen bg-[#000009]">
         <Map />
       </div>
 

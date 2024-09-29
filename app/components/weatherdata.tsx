@@ -10,5 +10,6 @@ export type WeatherStation = {
   name: string;
   latitude: number;
   longitude: number;
+  tourist_spot: string;
   data: WeatherData[];
 };
