@@ -1,6 +1,8 @@
-import Image from "next/image";
-import Map from "./visualisation";
+"use client";
+
 import React from "react";
+import Map from "./visualisation";
+import WeatherUI from  './WeatherUI';
 
 export default function Home() {
   return (
@@ -22,12 +24,12 @@ export default function Home() {
         <Map />
       </div>
 
-      <div className="w-full h-screen bg-[#000009]">
-        {/* Placeholder Div */}
+      <div className="w-full h-[220vh] bg-[#000009]">
         <div className="max-w-[750px] mx-auto px-8 flex flex-col justify-center h-full items-center">
-          <h1 className="text-[#7290A9] text-2xl sm:text-center sm:text-5xl">
-            Placeholder Div for Data Analysis
+          <h1 className="text-[#7290A9] text-2xl sm:text-center sm:text-5xl mb-6">
+            Weather Recommendation Tool
           </h1>
+          <WeatherUI />
         </div>
       </div>
     </main>
