@@ -65,7 +65,7 @@ export default function CustomMap({ title, data, stations }: MapProps) {
 
   // Function to determine the fill color based on max_temperature
   const getColorBasedOnTemperature = (max_temperature: number): string => {
-    if (max_temperature > 31) return '#e74c3c'; // Above 31°C - Red
+    if (max_temperature >=31) return '#e74c3c'; // Above 31°C - Red
     if (max_temperature >= 21 && max_temperature <= 30) return '#f39c12'; // 21-30°C - Orange
     if (max_temperature >= 10 && max_temperature <= 20) return '#1abc9c'; // 10-20°C - Green
     return '#3498db'; // Below 10°C - Blue
